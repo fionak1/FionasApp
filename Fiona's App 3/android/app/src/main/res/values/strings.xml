@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">TerraTASK</string>
+    <string name="title_activity_main">TerraTASK</string>
+    <string name="package_name">com.terratask.terrafix</string>
+    <string name="custom_url_scheme">com.terratask.terrafix</string>
+</resources>

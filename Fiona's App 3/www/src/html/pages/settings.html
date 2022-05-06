@@ -1,0 +1,36 @@
+<div id="Settings" class="page-content no-padding-top">
+    <div class="block-title">Application Settings</div>
+    <div class="card">
+        <div class="card-content card-content-padding">
+            <div class="list">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">
+                                Dark Theme
+                                <div class="item-footer">Enable the dark theme for the application</div>
+                            </div>
+                            <label class="toggle toggle-init color-blue" id="page-settings-darkThemeToggle">
+                                <input type="checkbox" id="darkThemeCheckbox">
+                                <span class="toggle-icon" v-on:click="toggleDarkTheme()"></span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">
+                                Font Size
+                                <div class="item-footer">Change the font size for the application</div>
+                            </div>
+                            <div class="row" style="width: 150px;">
+                                <div class="col-20" v-on:click="decreaseFontSize()">-</div>
+                                <div class="col-60 text-align-center">{{fontSize}}</div>
+                                <div class="col-20" v-on:click="increaseFontSize()">+</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

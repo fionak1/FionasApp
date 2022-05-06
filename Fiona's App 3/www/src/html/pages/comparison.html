@@ -1,0 +1,89 @@
+<div id="Comparison">
+    <template v-if="!showComparisonPage">
+        <div class="card">
+            <form class="searchbar no-margin">
+                <div class="searchbar-inner">
+                    <div class="searchbar-input-wrap">
+                        <input type="search" placeholder="Search" v-model="Search.Query">
+                        <i class="searchbar-icon"></i>
+                        <span class="input-clear-button"></span>
+                    </div>
+                    <span class="searchbar-disable-button if-not-aurora">Cancel</span>
+                </div>
+            </form>
+        </div>
+    </template>
+    <template v-if="Search.Result.length > 0 && !showComparisonPage">
+        <div class="card">
+            <div class="card-content card-content-padding">
+                <div class="list media-list no-ios-edges">
+                    <ul>
+                        <li v-for="searchResult in Search.Result" class="item-content">
+                            <div class="item-media">
+                                <i class="tfx-icon " :class="isItemChecked(searchResult) ? 'icon-checkbox-checked' : 'icon-checkbox-empty'" v-on:click="selectUnselectItemForComparison(searchResult)"></i>
+                            </div>
+                            <div class="item-inner">
+                                <div class="item-title">{{searchResult.Name}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template v-if="Search.Result.length == 0 && comparisonArray.length > 0 && !showComparisonPage">
+        <div class="card">
+            <div class="card-content card-content-padding">
+                <div class="list media-list no-ios-edges">
+                    <ul>
+                        <li v-for="comparisonResult in comparisonArray" class="item-content">
+                            <div class="item-media">
+                                <i class="tfx-icon " :class="isItemChecked(comparisonResult) ? 'icon-checkbox-checked' : 'icon-checkbox-empty'" v-on:click="selectUnselectItemForComparison(comparisonResult)"></i>
+                            </div>
+                            <div class="item-inner">
+                                <div class="item-title">{{comparisonResult.Name}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <template v-if="comparisonArray.length > 1">
+            <div class="card">
+                <div class="card-header" style="font-weight: bolder; font-size: 21px;">COMPARE</div>
+                <div class="card-content card-content-padding">
+                    <div class="list media-list no-ios-edges">
+                        <ul>
+                            <li v-for="option in Options" class="item-content">
+                                <div class="item-media">
+                                    <i class="tfx-icon" :class="selectedOption ? selectedOption.Name == option.Name ? 'icon-checkbox-checked' : 'icon-checkbox-empty' : 'icon-checkbox-empty'" v-on:click="selectUnselectOptionForComparison(option)"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">{{option.Name}}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <button class="button button-fill" style="background-color:#036d10;" v-on:click="compare();">Compare</button>
+        </template>
+    </template>
+    <template v-if="showComparisonPage">
+        <div class="block-title block-title-small" style="cursor: pointer;" v-on:click="goBack();"> &lt; back </div>
+        <div class="card">
+            <div class="card-header" style="font-weight: bolder; font-size: 21px;">RESULTS</div>
+            <div class="card-content card-content-padding">
+                <div class="list media-list no-ios-edges">
+                    <ul>
+                        <li v-for="results in displayComparison" class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title" :class="results.isRed ? 'text-color-red': 'text-color-green'" style="font-size: 20px;">{{results.Name}}<span class="float-right">{{results.Rating}}</span></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </template>
+</div>

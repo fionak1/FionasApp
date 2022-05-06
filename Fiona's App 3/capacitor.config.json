@@ -1,0 +1,9 @@
+{
+  "appId": "com.privacy.policy",
+  "appName": "PrivacyPolicy",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "cleartext": true
+  }
+}
