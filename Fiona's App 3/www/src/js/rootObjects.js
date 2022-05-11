@@ -18,19 +18,19 @@ var PrivacyPolicy_MUA = {
         Filter: {
             isFilterFrontPage: true,
             FilterOptions: [{
-                name: "Ascending",
+                name: "A-Z",
                 id: "ascending",
                 checked: false
             }, {
-                name: "Descending",
+                name: "Z-A",
                 id: "descending",
                 checked: false
             }, {
-                name: "Rating - Ascending",
+                name: "Rating (0-9)",
                 id: "ratingAscending",
                 checked: false
             }, {
-                name: "Rating - Descending",
+                name: "Rating (9-0)",
                 id: "ratingDescending",
                 checked: false
             }]

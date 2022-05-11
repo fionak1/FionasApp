@@ -2,7 +2,7 @@
     <template v-if="appDetails">
         <div class="block-title block-title-small" style="cursor: pointer;" v-on:click="goBack();"> &lt; back </div>
         <div class="card" v-for="data in selectedAppData">
-            <div class="padding" style="text-align: left !important;display: inline-flex !important">
+            <div class="padding" style="text-align: left !important;display: inline-flex !important; width: 98%">
                 <img :src="'./src/resources/' + data.ImageReference + '.png'" style="width: 90%; height: auto;" />
             </div>
             <div class="list media-list no-ios-edges">
@@ -95,7 +95,9 @@
                     <div class="card-content card-content-padding">
                         <div class="row">
                             <div class="col-33">
-                                <img src="./src/resources/WhatsApp_icon.png" style="width: 30px; height: auto" />
+                                <div class="padding" style="text-align: left !important;display: inline-flex !important">
+                                    <img :src="'./src/resources/' + item.ImageReference + '.png'" style="width: 100px; height: auto; text-align: center !important;" />
+                                </div>
                             </div>
                             <div class="col-66" style="text-align: center; padding-top: 7px">
                                 {{item.Name}}
@@ -111,7 +113,9 @@
                     <div class="card-content card-content-padding">
                         <div class="row">
                             <div class="col-33">
-                                <img src="./src/resources/WhatsApp_icon.png" style="width: 30px; height: auto" />
+                                <div class="padding" style="text-align: left !important;display: inline-flex !important">
+                                    <img :src="'./src/resources/' + item.ImageReference + '.png'" style="width: 100px; height: auto; text-align: center !important;" />
+                                </div>
                             </div>
                             <div class="col-66" style="text-align: center; padding-top: 7px">
                                 {{item.Name}}

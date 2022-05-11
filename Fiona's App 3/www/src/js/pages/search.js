@@ -20,6 +20,7 @@ PrivacyPolicy_MUA.f.p.Search = Vue.component('Search', function (resolve, reject
                 },
                 methods: {
                     showDataList: async function () {
+                        let self = this;
                         try {
                             let results = await PrivacyPolicy_MUA.f.p.AJAXCalls.getAllData();
                             let resultsArray = [];
@@ -28,13 +29,14 @@ PrivacyPolicy_MUA.f.p.Search = Vue.component('Search', function (resolve, reject
                                     "Name": results[i].Name,
                                     "ImageReference": results[i].ImageReference,
                                 };
-                                this.apps.push(dataObj);
+                                self.apps.push(dataObj);
                             }
                         } catch (err) {
                             console.log(err);
                         }
                     },
                     getSpecificData: async function (_item) {
+                        this.selectedAppData = [];
                         let results = await PrivacyPolicy_MUA.f.p.AJAXCalls.getSpecificData(_item.Name);
                         let resultsArray = [];
                         for (let i = 0; i < results.length; i++) {

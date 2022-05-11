@@ -52,26 +52,6 @@ PrivacyPolicy_MUA.f.p.Index = new Vue({
             PrivacyPolicy_MUA.o.AppData.Framework7.panel.open(panel, true);
 
         },
-        selectFilterOption: function (_filterOption) {
-            this.selectedFilterOption = _filterOption;
-            for (let i = 0; i < PrivacyPolicy_MUA.o.Filter.FilterOptions.length; i++) {
-                if (PrivacyPolicy_MUA.o.Filter.FilterOptions[i].id == _filterOption.id) {
-                    PrivacyPolicy_MUA.o.Filter.FilterOptions[i].checked = true;
-                } else {
-                    PrivacyPolicy_MUA.o.Filter.FilterOptions[i].checked = false;
-                }
-            }
-        },
-        clearFilters: function () {
-            for (let i; i < PrivacyPolicy_MUA.o.Filter.FilterOptions.length; i++) {
-                PrivacyPolicy_MUA.o.Filter.FilterOptions[i].checked = false;
-            }
-            this.selectedFilterOption = null;
-        },
-        closePopup: function () {
-            PrivacyPolicy_MUA.o.AppData.Framework7.popup.close();
-            // location.reload();
-        }
     },
     computed: {},
     mounted() {

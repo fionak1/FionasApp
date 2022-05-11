@@ -12,6 +12,7 @@ PrivacyPolicy_MUA.f.p.Filter = Vue.component('Filter', function (resolve, reject
                         selectedProperty: null,
                         state: 'appsList',
                         filterOptions: PrivacyPolicy_MUA.o.Filter.FilterOptions,
+                        selectedFilterOption: null
                     }
                 },
                 computed: {
@@ -33,7 +34,8 @@ PrivacyPolicy_MUA.f.p.Filter = Vue.component('Filter', function (resolve, reject
                             for (let i = 0; i < results.length; i++) {
                                 let dataObj = {
                                     "Name": results[i].Name,
-                                    "ImageReference": results[i].ImageReference
+                                    "ImageReference": results[i].ImageReference,
+                                    "Rating": results[i].Rating
                                 };
                                 resultsArray.push(dataObj);
                             }
@@ -42,6 +44,42 @@ PrivacyPolicy_MUA.f.p.Filter = Vue.component('Filter', function (resolve, reject
                         } else {
                             this.showDataList();
                         }
+                    },
+                    selectFilterOption: function (_filterOption) {
+                        this.selectedFilterOption = _filterOption;
+                        for (let i = 0; i < PrivacyPolicy_MUA.o.Filter.FilterOptions.length; i++) {
+                            if (PrivacyPolicy_MUA.o.Filter.FilterOptions[i].id == _filterOption.id) {
+                                PrivacyPolicy_MUA.o.Filter.FilterOptions[i].checked = true;
+                            } else {
+                                PrivacyPolicy_MUA.o.Filter.FilterOptions[i].checked = false;
+                            }
+                        }
+                    },
+                    clearFilters: function () {
+                        for (let i; i < PrivacyPolicy_MUA.o.Filter.FilterOptions.length; i++) {
+                            PrivacyPolicy_MUA.o.Filter.FilterOptions[i].checked = false;
+                        }
+                        this.selectedFilterOption = null;
+                    },
+                    closePopup: function () {
+                        PrivacyPolicy_MUA.o.AppData.Framework7.popup.close();
+                        // location.reload();
+                    },
+                    openPopup: function (_popup) {
+                        PrivacyPolicy_MUA.o.AppData.Framework7.popup.open(_popup);
+                        // location.reload();
+                    },
+                    activateFilter: function () {
+                        if (this.selectedFilterOption.id == 'ascending') {
+                            this.apps = _.sortBy(this.apps, 'Name');
+                        } else if (this.selectedFilterOption.id == 'descending') {
+                            this.apps = _.sortBy(this.apps, 'Name').reverse();
+                        } else if (this.selectedFilterOption.id == 'ratingAscending') {
+                            this.apps = _.sortBy(this.apps, 'Rating');
+                        } else if (this.selectedFilterOption.id == 'ratingDescending') {
+                            this.apps = _.sortBy(this.apps, 'Rating').reverse();
+                        }
+                        this.closePopup();
                     },
                     showApp: function (_app) {
                         this.selectedApp = _app;
@@ -69,7 +107,8 @@ PrivacyPolicy_MUA.f.p.Filter = Vue.component('Filter', function (resolve, reject
                         for (let i = 0; i < results.length; i++) {
                             let dataObj = {
                                 "Name": results[i].Name,
-                                "ImageReference": results[i].ImageReference
+                                "ImageReference": results[i].ImageReference,
+                                "Rating": results[i].Rating
                             };
                             this.apps.push(dataObj);
                         }
