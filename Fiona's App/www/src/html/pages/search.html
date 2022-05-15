@@ -1,0 +1,159 @@
+<div id="Search" class="page-content no-padding-top" style="overflow-x: hidden;">
+    <template v-if="appDetails">
+        <div class="block-title block-title-small" style="cursor: pointer;" v-on:click="goBack();"> &lt; back </div>
+        <div class="card" v-for="data in selectedAppData">
+            <div class="padding" style="text-align: left !important;display: inline-flex !important; width: 98%">
+                <img :src="'./src/resources/' + data.ImageReference + '.png'" style="width: 90%; height: auto;" />
+            </div>
+            <div class="list media-list no-ios-edges">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner text-align-center">
+                            <div>
+                                <a class="item-title" style="font-size: 30px" :href="data.WebLink"> {{data.Name}}</a>
+                            </div>
+                            <a class="item-subtitle" style="font-size: 20px; opacity: 0.5">Rating: {{data.Rating}}</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div class="card-content">
+                <div class="text-align-center padding-vertical">
+                    <div class="block-title block-title-medium text-align-center">Age: {{data.Age}}</div>
+                    <div class="item-subtitle text-align-center" style="font-size: 20px;">Data Held: {{formatData(data.DataHeld)[0] == 0 ? "None": formatData(data.DataHeld)[0]}}</div>
+                </div>
+                <div class="text-align-center padding-vertical">
+                </div>
+            </div>
+        </div>
+        <div class="card" v-for="data in selectedAppData">
+            <div class="card-header text-align-center">
+                <div class="block-title block-title-medium text-align-left">Information Collected:</div>
+            </div>
+            <div class="card-content card-content-padding">
+                <div class="list media-list no-ios-edges">
+                    <ul>
+                        <li v-for="itemData in formatData(data.InformationCollected)" class="item-content">
+                            <div class="item-inner">
+                                {{itemData}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card" v-for="data in selectedAppData">
+            <div class="card-header text-align-center">
+                <div class="block-title block-title-medium text-align-left">Usage Of Information:</div>
+            </div>
+            <div class="card-content card-content-padding">
+                <div class="list media-list no-ios-edges">
+                    <ul>
+                        <li v-for="itemData in formatData(data.UsageOfInformation)" class="item-content">
+                            <div class="item-inner">
+                                {{itemData}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card" v-for="data in selectedAppData">
+            <div class="card-header text-align-center">
+                <div class="block-title block-title-medium text-align-left">Disclosure Of Information:</div>
+            </div>
+            <div class="card-content card-content-padding">
+                <div class="list media-list no-ios-edges">
+                    <ul>
+                        <li v-for="itemData in formatData(data.DisclosureOfInformation)" class="item-content">
+                            <div class="item-inner">
+                                {{itemData}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card" v-for="data in selectedAppData">
+            <div class="card-header text-align-center">
+                <div class="block-title block-title-medium text-align-left">Disclosure Of Information:</div>
+            </div>
+            <div class="card-content">
+                <div class="list media-list no-ios-edges">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item" :class="itemIndex == 0 ? 'active' : null" v-for="(itemData, itemIndex) in formatData(data.Images)">
+                                            <img :src="'./src/resources/' + itemData + '.png'" class="d-block w-100" alt="itemData" />
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template v-else>
+        <div class="card">
+            <form class="searchbar no-margin">
+                <div class="searchbar-inner">
+                    <div class="searchbar-input-wrap">
+                        <input type="search" placeholder="Search" v-model="Search.Query">
+                        <i class="searchbar-icon"></i>
+                        <span class="input-clear-button"></span>
+                    </div>
+                    <span class="searchbar-disable-button if-not-aurora">Cancel</span>
+                </div>
+            </form>
+        </div>
+        <template v-if="!Search.Query">
+            <div class="row">
+                <div class="card col-custom" v-for="item in apps" v-on:click="getSpecificData(item)">
+                    <div class="card-content card-content-padding">
+                        <div class="row">
+                            <div class="col-33">
+                                <div class="padding" style="text-align: left !important;display: inline-flex !important">
+                                    <img :src="'./src/resources/' + item.ImageReference + '.png'" style="width: 100px; height: auto; text-align: center !important;" />
+                                </div>
+                            </div>
+                            <div class="col-66" style="text-align: center; padding-top: 7px">
+                                {{item.Name}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template v-else>
+            <div class="row">
+                <div class="card col-custom" v-for="item in filteredApps" v-on:click="getSpecificData(item)">
+                    <div class="card-content card-content-padding">
+                        <div class="row">
+                            <div class="col-33">
+                                <div class="padding" style="text-align: left !important;display: inline-flex !important">
+                                    <img :src="'./src/resources/' + item.ImageReference + '.png'" style="width: 100px; height: auto; text-align: center !important;" />
+                                </div>
+                            </div>
+                            <div class="col-66" style="text-align: center; padding-top: 7px">
+                                {{item.Name}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
+</div>
